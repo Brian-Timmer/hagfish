@@ -1,0 +1,42 @@
+---
+title: 'To do: hagfish data'
+author: "Brian Timmer"
+date: "August 19, 2019"
+output: html_document
+---
+# Wrangeling data
+
+  Hagfish data needs to be 'wrangled' so that one file contains the new isotope information along with the original information from the study.
+
+  Each individual hagfish (e.g. 313S01F17) will have a sample of muscle tissue and liver tissue. Each tissue will have a "lipid extracted" and "non-extracted" values for δ15N and δ13C, and probaby a C:N ratio attached in a seperate column. 
+  
+  Ideally, we will want to check our response variables (C:N, etc.) versus our explanatory variables (season/month, location) to look for trends. The hagfish were caught at seemingly random times and places, so it may be tricky working out which variables can actaully be used. In a perfect world, location and year will not be confounding factors and we can simply look at differences by season...
+  
+  We can also use some other variables like weight/length or number/size of eggs to see if these have an effect on our isotope data. If multiple factors seem to be influencing our data significantly, we could perhaps run an AIC test and report on that... We can talk about this.
+  
+
+# C:N ratios
+  
+  First we will want to examine the basic trends in the C:N values for the non-extracted hagfish. Zintzen et al. (2013) used Δδ13C values (with Δδ13C = δ13C’[extracted] – δ13C[non-extracted]) as a proxy for lipid content (because muscle tissues with higher lipid content will have greater negative δ13C values)
+  
+  If Shapna attached a C:N ratio we should find out what equation she used and check against the supplementary material provided in Zintzen et al., because they reported seeing inconsistency in their results. If Shapnas way does not seem reliable, we can calcualte and use Δδ13C values. (I believe the classic method uses non-extracted [(%C×14)/(%N×12)]) Also I believe the best tissue to use for this is muscle, but there may be an interesting trend in the liver as well.
+  
+  Fluctuating C:N ratios will be indicative of classic feast/famine type life history, in which the hagfish are eating abundant carrion in the summer/fall and living off of reserves in the winter/spring. similar ratios year round would be indicative of active predation, as seen in the shallow species used in Zintzen et al.
+
+# δ13C and δ15N
+
+  This data will be a bit trickier to use, as we do not have any prey data for these fishes (unfortunately), which really cuts out detail on the food web aspect.
+
+  We will likely want to use the 'extracted' δ13C values, as lipids are depleted of 13C, and the 'non-extracted' δ15N values, as lipid extraction can destabalize polar molecules leading to changing 15N readings. We can look to see if δ13C changes across a locational gradient, with changes occuring in populations that are further off shore. If so this may indicate that hagfish of the same species occupy different trophic niches based on habitat (in an inlet, nearshore, or offshore). 13C may indicate dietary sources of carbon because there is little trophic enrichment between an organism and its diet (Vander Zanden and Rasmussen, 2001; Post, 2002).
+  
+  δ15N is often thought to be indicative of trophic position, but as a scavenger this may be misleading. Additionally high δ15N can mean that the hagfish is starving, so we may need to pair this information with other data to make any sense of it, or it may not be particularily useful. 
+  
+  Non-migratory individuals are expected to exhibit similar stable isotope ratios due to assimilation of local foods, while transients should display greater isotopic variation. Likewise, feeding on carrion of migrating species (whales, sea lions, etc.) may lead to high variability in data. We could look at variability for insight into different lifestyle trends.
+  
+# Final thoughts
+  
+  Basically, we will want to create a bunch of plots to look at some overall trends in the data. These can be fairly rough, as long as they convey the details we want them too. We can discuss what we see with Kieran and Francis, and potentially send the information to Jeff Drazer as well if we want another heavy hitter on the paper (he may have payed for part of the study anywasy, im not sure).
+  
+  Based on this information we can figure out the best way to statistically analyze the data, or what type of model to fit, etc.
+  
+  Feel free to play around with the data in any way you think might be interesting. In the words of Kieran, we are trying to tell a story with this information. so if you can think of an interesting way to look at the data (that is not too far off topic or too much of a stretch), go for it. We can always dial back later.
