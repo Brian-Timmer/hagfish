@@ -6,6 +6,7 @@ output: html_document
 ---
 # Wrangeling data
 
+
   Hagfish data needs to be 'wrangled' so that one file contains the new isotope information along with the original information from the study.
 
   Each individual hagfish (e.g. 313S01F17) will have a sample of muscle tissue and liver tissue. Each tissue will have a "lipid extracted" and "non-extracted" values for δ15N and δ13C, and probaby a C:N ratio attached in a seperate column. 
