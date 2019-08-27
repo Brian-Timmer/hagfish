@@ -1,0 +1,26 @@
+---
+title: "2019.Uvic_hagfish_datamanipulation"
+author: "Lucas Agagnier"
+date: "August 27, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(xlsx)# reading from excel docs
+
+knitr::opts_chunk$set(echo = TRUE)
+
+fl_in<-"Timmer_2019_JuanesLab-Hagfish_Isotope_data.xlsx"
+path<-"C:\\Users\\lagag\\Documents\\00-documents\\2019.juaneshagfish\\hagfish"
+
+
+```
+
+#Introduction  
+  The best way to extract the data will be from the excel sheets directly and making some text file documents to seperate come tables that have been combined.  
+```{r}
+
+```
+  
+  

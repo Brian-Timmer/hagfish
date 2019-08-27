@@ -3,8 +3,6 @@ title: 'To do: hagfish data'
 author: "Brian Timmer"
 date: "August 19, 2019"
 output: html_document
-  toc: yes # tells knitr to make a table of contents
-  toc_float: yes # tells TABLE of contents to float
 ---
 # Wrangeling data
 
