@@ -49,7 +49,7 @@ boxplot(mscl$C.N)
 ```{r}
 unvec<-unique(t_solid_alltrays$sample.type)
 
-t_ques_tray4<-t_ques_tray4[rowSums(is.na(t_ques_tray4))==0,]
+t_ques_tray4<-t_ques_tray4[rowSums(is.na(t_ques_tray4))==0,]# gets rid of any rows that have null values
 
   samp_tiss<-t_solid_alltrays[t_solid_alltrays$sample.type=="muscle",]
   qu_samptiss<-t_ques_tray4[t_ques_tray4$sample.type=="muscle",]
@@ -60,16 +60,45 @@ t_ques_tray4<-t_ques_tray4[rowSums(is.na(t_ques_tray4))==0,]
   y<-ggplot(data = samp_tiss_1,aes(x=samp_tiss_1$sample.type,y=samp_tiss_1$C.N))+geom_boxplot()
   samp_tiss_2<-t_solid_alltrays[t_solid_alltrays$sample.type=="standard",]
   z<-ggplot(data = samp_tiss_2,aes(x=samp_tiss_2$sample.type,y=samp_tiss_2$C.N))+geom_boxplot()
-  x
-  y
-  z
+  
+  
+  
 ```
 
 ```{r}
-filter(t_read,t_read$sample.type=="muscle"&&t_read$ques==FALSE)
+fltr_mscl<-filter(t_read,t_read$sample.type=="muscle")%>%
+  filter(t_read,t_read$ques=FALSE)
 ggplot(data = t_read,aes(x=t_read$sample.type,y=t_read$C.N))+geom_boxplot()+geom_point(data = t_read,aes(x))
 ```
 
+```{r}
+le<-t_read[c(1:154),]
 
+ggplot(le,aes(x=le$sample.type,y=le$C.N))+geom_boxplot()
+ggplot(le,aes(x=le$sample.type,y=le$Î.C13))+geom_boxplot()
+ggplot(le,aes(x=le$sample.type,y=le$Î..N15))+geom_boxplot()
+```
+##grabbing outliers
+grabbing the outliers from each of the box plots 
+```{r}
+dc_outl<-le[le$Î.C13 < -20,] #delta carbon where it is greater than -20
+#write.xlsx(dc_outl,file = "list_outliers_deltacarbon")
+```
+
+##non- le outliers
+
+```{r}
+nle<-t_read[c(155:length(t_read$well.number)),]
+ggplot(nle,aes(x=nle$sample.type,y=nle$C.N))+geom_boxplot()
+ggplot(nle,aes(x=nle$sample.type,y=nle$Î.C13))+geom_boxplot()
+ggplot(nle,aes(x=nle$sample.type,y=nle$Î..N15))+geom_boxplot()
+```
   
+  
+###checking for outliers
+
+```{r}
+dc_outl_nle<-nle[nle$Î.C13 < -24,]
+```
+
   
