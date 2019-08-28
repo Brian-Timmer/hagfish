@@ -2,7 +2,11 @@
 title: 'To do: hagfish data'
 author: "Brian Timmer"
 date: "August 19, 2019"
-output: html_document
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_float: yes
 ---
 # Wrangeling data
 

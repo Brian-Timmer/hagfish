@@ -2,7 +2,11 @@
 title: "2019.Uvic_hagfish_datamanipulation"
 author: "Lucas Agagnier"
 date: "August 27, 2019"
-output: html_document
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_float: yes
 ---
 
 ```{r setup, include=FALSE}
