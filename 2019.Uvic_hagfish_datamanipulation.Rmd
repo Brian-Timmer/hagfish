@@ -1,0 +1,108 @@
+---
+title: "2019.Uvic_hagfish_datamanipulation"
+author: "Lucas Agagnier"
+date: "August 27, 2019"
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_float: yes
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(xlsx)# reading from excel docs
+
+knitr::opts_chunk$set(echo = TRUE)
+
+fl_in<-"Timmer_2019_JuanesLab-Hagfish_Isotope_data.xlsx"
+path<-"C:\\Users\\lagag\\Documents\\00-documents\\2019.juaneshagfish\\hagfish"
+t_in<-"all_trays.csv"
+setwd(path)
+
+```
+
+#Introduction  
+  The best way to extract the data will be from the excel sheets directly and making some text file documents to seperate come tables that have been combined.  
+```{r}
+t_read<-read.delim(t_in,sep = ",")
+head(t_read)
+```
+
+#Possible need for duplication
+  We need to check if the variation is acceptable. There were also some questionable results in tray four. Ive added a row in in the csv file to label which runs were questionable called "ques". I will exclude those from the intial box plots and check them against it.  
+```{r}
+t_solid_alltrays<-t_read[!t_read$ques==TRUE,]#definate values
+t_ques_tray4<-t_read[t_read$ques==TRUE,]#values that had problems
+
+head(t_solid_alltrays)
+
+head(t_ques_tray4)
+
+boxplot(t_solid_alltrays$C.N)#this is too general and we need to break things down before we can say anything for sure
+
+```
+##muscles  
+
+```{r}
+mscl<-t_solid_alltrays[t_solid_alltrays$sample.type=="muscle",]
+head(mscl)
+boxplot(mscl$C.N)
+```
+##loop for all sample types  
+```{r}
+unvec<-unique(t_solid_alltrays$sample.type)
+
+t_ques_tray4<-t_ques_tray4[rowSums(is.na(t_ques_tray4))==0,]# gets rid of any rows that have null values
+
+  samp_tiss<-t_solid_alltrays[t_solid_alltrays$sample.type=="muscle",]
+  qu_samptiss<-t_ques_tray4[t_ques_tray4$sample.type=="muscle",]
+  
+  x<-ggplot(data = samp_tiss,aes(x=samp_tiss$sample.type,y=samp_tiss$C.N))+geom_boxplot(colour="blue")#+geom_bar(data=qu_samptiss,aes(x=qu_samptiss$sample.type,y=qu_samptiss$C.N))
+  
+  samp_tiss_1<-t_solid_alltrays[t_solid_alltrays$sample.type=="liver",]
+  y<-ggplot(data = samp_tiss_1,aes(x=samp_tiss_1$sample.type,y=samp_tiss_1$C.N))+geom_boxplot()
+  samp_tiss_2<-t_solid_alltrays[t_solid_alltrays$sample.type=="standard",]
+  z<-ggplot(data = samp_tiss_2,aes(x=samp_tiss_2$sample.type,y=samp_tiss_2$C.N))+geom_boxplot()
+  
+  
+  
+```
+
+```{r}
+fltr_mscl<-filter(t_read,t_read$sample.type=="muscle")%>%
+  filter(t_read,t_read$ques=FALSE)
+ggplot(data = t_read,aes(x=t_read$sample.type,y=t_read$C.N))+geom_boxplot()+geom_point(data = t_read,aes(x))
+```
+
+```{r}
+le<-t_read[c(1:154),]
+
+ggplot(le,aes(x=le$sample.type,y=le$C.N))+geom_boxplot()
+ggplot(le,aes(x=le$sample.type,y=le$Î.C13))+geom_boxplot()
+ggplot(le,aes(x=le$sample.type,y=le$Î..N15))+geom_boxplot()
+```
+##grabbing outliers
+grabbing the outliers from each of the box plots 
+```{r}
+dc_outl<-le[le$Î.C13 < -20,] #delta carbon where it is greater than -20
+#write.xlsx(dc_outl,file = "list_outliers_deltacarbon")
+```
+
+##non- le outliers
+
+```{r}
+nle<-t_read[c(155:length(t_read$well.number)),]
+ggplot(nle,aes(x=nle$sample.type,y=nle$C.N))+geom_boxplot()
+ggplot(nle,aes(x=nle$sample.type,y=nle$Î.C13))+geom_boxplot()
+ggplot(nle,aes(x=nle$sample.type,y=nle$Î..N15))+geom_boxplot()
+```
+  
+  
+###checking for outliers
+
+```{r}
+dc_outl_nle<-nle[nle$Î.C13 < -24,]
+```
+
+  
