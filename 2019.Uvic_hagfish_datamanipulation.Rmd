@@ -105,4 +105,14 @@ ggplot(nle,aes(x=nle$sample.type,y=nle$Î..N15))+geom_boxplot()
 dc_outl_nle<-nle[nle$Î.C13 < -24,]
 ```
 
+
+
+#File directory investigation  
+I believe it would be useful to have something that can call on the git repository location no matter who's computer the file is on. 
+```{r finding a file directory}
+setwd("/lagag/Documents/00-documents")
+
+```
+
+
   
