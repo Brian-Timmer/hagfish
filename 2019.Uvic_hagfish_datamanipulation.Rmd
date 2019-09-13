@@ -111,6 +111,7 @@ dc_outl_nle<-nle[nle$Î.C13 < -24,]
 I believe it would be useful to have something that can call on the git repository location no matter who's computer the file is on. 
 ```{r finding a file directory}
 setwd("/lagag/Documents/00-documents")
+list.files("C:\\Users\\lagag\\Documents\\00-documents\\2019.uvic_rasp_statistics", pattern=".png")# this will fine all pngs in this folder. but I want to find the folder first
 
 ```
 
